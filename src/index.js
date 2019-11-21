@@ -12,6 +12,8 @@ module.exports = (mongoose) => {
     models.forEach((model) => {
       const create = model.create.bind(model);
 
+      // todo: added more mongoose methods
+
       model.create = async (doc, ...args) => {
         const counter = await Counters.findOneAndUpdate({
           name: model.collection.name,
