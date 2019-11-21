@@ -21,22 +21,22 @@ mongoose.connect(process.env.MONGODB_URL, {
   useFindAndModify: false,
 });
 
-const UsersSchema = new mongoose.Schema({
+const Users = mongoose.model('users', new mongoose.Schema({
   _id: Number,
   firstName: String,
   lastName: String,
-}, { _id: false });
+}, { _id: false }));
 
-const ReviewsSchema = new mongoose.Schema({
+const Reviews = mongoose.model('reviews', new mongoose.Schema({
   _id: Number,
   text: String,
   starts: Number,
-}, { _id: false });
+}, { _id: false }));
 
-mongoIncrement(UsersSchema, ReviewsSchema, ...); // => Promise
+mongoIncrement(Users, Reviews, ...); // => Promise
 
 module.exports = {
-  Users: mongoose.model('users', UsersSchema),
-  Reviews: mongoose.model('reviews', ReviewsSchema),
+  Users,
+  Reviews,
 };
 ```
